@@ -1,0 +1,61 @@
+to update the M2 git repo from the main repo (not the eisenbud branch):
+git pull upstream master
+
+gmake uninstall-package-InverseSystems
+
+
+If that example error hits me, I'll just fix it somehow, so there's no point in worrying about such things prematurely.
+
+There's no reason to do "git clone" so often.  Just stick with the same repository and update it or clean it.
+
+Here's the development procedure.  Create a new branch:
+
+git checkout -b my-new-branch
+git remote set-url david https://github.com/eisenbud/M2.git <--- just once per repository
+git push -u david my-new-branch
+
+
+make some changes
+
+git status
+git commit -a -m 'I made some changes'
+  -- or just use "git commit -a" to pop up an editor to make a longer, more detailed commit message
+git push
+
+to get the latest changes from our master branch
+
+git merge origin master
+
+when at a good point, go to github.com/eisenbud to submit a pull request
+
+
+---------------
+from "git hints 2":
+
+    Now remember to add
+        CPPFLAGS="-I/usr/local/include -I/usr/local/opt/readline/include" LDFLAGS="-L/usr/local/l\
+ib -L/usr/local/opt/readline/lib" CC="gcc-4.9 -m64" CXX="g++-4.9 -m64" --build=x86_64-apple-darwi\
+n
+      to the "configure" command line below in the section on compiling Macaulay2.
+    Note: under Mac OS version 10.10 (Yosemite), the test for whether compiling with
+      g++-4.9 and then linking with gcc-4.9 works may fail, in which case adding
+        MACOSX_DEPLOYMENT_TARGET=10.9
+      to the environment (e.g., with the "sh" command
+        export MACOSX_DEPLOYMENT_TARGET=10.9
+      ) may help.  Apparently the tools have trouble determining that 10.10 is a
+      newer version number than 10.9.  Linking alternatively with libgcc_eh
+      seems to break C++ exception handling.
+
+git remote -v
+git remote add David https://github.com/Eisenbud/M2
+
+To merge from the M2 master repo to "David-Dev":
+
+git fetch origin
+git merge origin/master
+
+[if there are conflicts in X.m2, then edit to remove them, after which:
+git add X.m2
+git commit -a -m"fixed conflict in X.m2"
+git push
+]
