@@ -61,6 +61,7 @@ git push
 ]
 
 --writing a list to a file and getting it back:
+--From Dan Grayson:
 i1 : L = {"asdf", "qer", "wery"};
 i2 : "/tmp/foo" << toExternalString L << close
 o2 = /tmp/foo
@@ -74,3 +75,26 @@ o1 = {asdf, qer, wery}
 o1 : List
 i2 : toExternalString oo
 o2 = {"asdf","qer","wery"}
+
+-------from Mahrud
+You may want to use "lines", cf. 
+
+https://faculty.math.illinois.edu/Macaulay2/doc/Macaulay2-1.17/share/doc/Macaulay2/Macaulay2Doc/html/_lines.html
+
+as your scan loop already inserts newlines after each element in L4; e.g.
+
+L5 = lines get "examples";
+
+This works if your strings don't contain any new lines. If they do have new lines, you can use a different separator. For instance:
+
+L = {"hi\nhello", "bye\ngoodbye"}
+L2 = between("DELIMITER", L)
+"examples" << concatenate L2 << close
+
+And separate them when you read the file: 
+
+L3 = separate("DELIMITER", get "examples")
+L3_0 == L_0
+L3_1 == L_1
+
+
