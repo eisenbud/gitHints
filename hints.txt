@@ -59,3 +59,18 @@ git add X.m2
 git commit -a -m"fixed conflict in X.m2"
 git push
 ]
+
+--writing a list to a file and getting it back:
+i1 : L = {"asdf", "qer", "wery"};
+i2 : "/tmp/foo" << toExternalString L << close
+o2 = /tmp/foo
+o2 : File
+i3 : restart
+Macaulay2, version 1.17.2.1
+with packages: ConwayPolynomials, Elimination, IntegralClosure, InverseSystems, LLLBases, MinimalPrimes, PrimaryDecomposition, ReesAlgebra, Saturation, TangentCone
+
+i1 : L = value get "/tmp/foo"
+o1 = {asdf, qer, wery}
+o1 : List
+i2 : toExternalString oo
+o2 = {"asdf","qer","wery"}
