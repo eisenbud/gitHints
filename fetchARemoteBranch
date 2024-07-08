@@ -1,0 +1,34 @@
+Here's what works to set up a local branch that tracks an existing
+remote branch. First
+
+git remote show origin
+
+shows what remote branches there are. Then
+
+git checkout --track origin/<remote branchName>
+
+EXAMPLE:
+
+git remote show origin
+* remote origin
+  Fetch URL: git@github.com:Macaulay2/Workshop-2024-Utah.git
+  Push  URL: git@github.com:Macaulay2/Workshop-2024-Utah.git
+  HEAD branch: main
+  Remote branches:
+    CYTools        tracked
+    DbCY           tracked
+    GLInvariants   tracked
+    NumberFields   tracked
+    Radical        tracked
+    RuledSurfaces  tracked
+    ToricVarieties tracked
+    Varieties      tracked
+    main           tracked
+    practice       tracked
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local ref configured for 'git push':
+    main pushes to main (up to date)
+hippo-457:Workshop-2024-Utah de1$ git checkout --track origin/Radical
+branch 'Radical' set up to track 'origin/Radical'.
+Switched to a new branch 'Radical'
